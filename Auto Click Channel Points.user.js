@@ -11,19 +11,28 @@
 // ==/UserScript==
 
 /**
- * Using a set interval of 5 seconds, poll the browser for the Claim Bonus button
+ * Use MutationObserver to monitor for the appearance of the "Claim Bonus" button
  */
 
-const handlePointsButton = () => {
-    return setInterval(() => {
-        const claimPointsBtn = document.querySelector('[aria-label="Claim Bonus"]');
-        if (claimPointsBtn !== null) {
-            claimPointsBtn.click()
-            console.log('Points claimed!');
+function monitorForClaimBonus() {
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.getAttribute('aria-label') === 'Claim Bonus') {
+                        console.log('Claim Bonus button detected:', node);
+                        // Perform any action you want here, e.g., auto-click the button
+                        node.click();
+                    }
+                });
+            }
         }
-    }, 5000)
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
 }
 
+// Call the function to start monitoring
 if (window.top === window.self) {
-    const pointButtonIntvl = handlePointsButton()
+    monitorForClaimBonus();
 }
