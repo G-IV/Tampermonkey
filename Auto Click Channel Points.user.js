@@ -1,14 +1,13 @@
 // ==UserScript==
-// @name         BL3 & Twitch
+// @name         Auto Click Channel Points
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       You
+// @version      0.2
+// @description  Auto-clicks channel point button
+// @author       G-IV
 // @match        https://www.twitch.tv/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @run-at       document-idle
 // @grant        none
-// @require      file:///Users/georgeburrows/Documents/Desktop/Projects/BL3 & Twitch/BL3 & Twitch.user.js
 // ==/UserScript==
 
 const bl3Iframe = {
