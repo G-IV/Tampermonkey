@@ -14,25 +14,39 @@
  * Use MutationObserver to monitor for the appearance of the "Claim Bonus" button
  */
 
-function monitorForClaimBonus() {
+function monitorSpecificElement() {
+    const targetElement = document.querySelector('.Layout-sc-1xcs6mc-0.kxrhnx');
+
+    if (!targetElement) {
+        console.warn('Target element not found. Retrying...');
+        setTimeout(monitorSpecificElement, 1000); // Retry after 1 second if the element is not found
+        return;
+    }
+    else {
+        console.log('Target element found:', targetElement);
+    }
+
     const observer = new MutationObserver((mutations) => {
         for (const mutation of mutations) {
             if (mutation.type === 'childList') {
                 mutation.addedNodes.forEach((node) => {
-                    if (node.nodeType === Node.ELEMENT_NODE && node.getAttribute('aria-label') === 'Claim Bonus') {
-                        console.log('Claim Bonus button detected:', node);
-                        // Perform any action you want here, e.g., auto-click the button
-                        node.click();
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        const claimBonusButton = node.querySelector('[aria-label="Claim Bonus"]');
+                        if (claimBonusButton) {
+                            console.log('Claim Bonus button detected:', claimBonusButton);
+                            claimBonusButton.click();
+                        }
                     }
                 });
             }
         }
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(targetElement, { childList: true, subtree: true });
+    console.log('MutationObserver is set up to monitor the target element:', targetElement);
 }
 
 // Call the function to start monitoring
 if (window.top === window.self) {
-    monitorForClaimBonus();
+    monitorSpecificElement();
 }
