@@ -24,6 +24,14 @@ function monitorSpecificElement() {
     }
     else {
         console.log('Target element found:', targetElement);
+        // Check if the button is already present
+        const claimBonusButton = targetElement.querySelector('[aria-label="Claim Bonus"]');
+        if (claimBonusButton) {
+            console.log('Claim Bonus button already present:', claimBonusButton);
+            claimBonusButton.click();
+        } else {
+            console.log('Claim Bonus button not found in the target element.');
+        }
     }
 
     const observer = new MutationObserver((mutations) => {
