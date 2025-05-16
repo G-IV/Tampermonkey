@@ -14,8 +14,9 @@
  * Use MutationObserver to monitor for the appearance of the "Claim Bonus" button
  */
 
-function monitorSpecificElement() {
-    const targetElement = document.querySelector('.Layout-sc-1xcs6mc-0.kxrhnx');
+function monitorSpecificElement(querySelector) {
+    //'.Layout-sc-1xcs6mc-0.kxrhnx'
+    const targetElement = document.querySelector(querySelector);
 
     if (!targetElement) {
         console.warn('Target element not found. Retrying...');
@@ -54,7 +55,20 @@ function monitorSpecificElement() {
     console.log('MutationObserver is set up to monitor the target element:', targetElement);
 }
 
+function searchForClaimBonusButton() {
+    const intervalId = setInterval(() => {
+        const claimBonusButton = document.querySelector('[aria-label="Claim Bonus"]');
+        if (claimBonusButton) {
+            console.log('Claim Bonus button found:', claimBonusButton);
+            monitorSpecificElement(querySelector)
+            clearInterval(intervalId); // Stop searching once the button is found and clicked
+        } else {
+            console.log('Claim Bonus button not found. Retrying in 5 seconds...');
+        }
+    }, 5000); // Retry every 5 seconds
+}
+
 // Call the function to start monitoring
 if (window.top === window.self) {
-    monitorSpecificElement();
+    searchForClaimBonusButton()
 }
