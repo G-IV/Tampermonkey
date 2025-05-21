@@ -14,9 +14,8 @@
  * Use MutationObserver to monitor for the appearance of the "Claim Bonus" button
  */
 
-function monitorSpecificElement(querySelector) {
+function monitorSpecificElement(targetElement) {
     //'.Layout-sc-1xcs6mc-0.kxrhnx'
-    const targetElement = document.querySelector(querySelector);
     console.log('Target element:', targetElement);
     if (!targetElement) {
         console.warn('Target element not found. Retrying...');
