@@ -60,7 +60,7 @@ function searchForClaimBonusButton() {
         const claimBonusButton = document.querySelector('[aria-label="Claim Bonus"]');
         if (claimBonusButton) {
             console.log('Claim Bonus button found:', claimBonusButton);
-            monitorSpecificElement(querySelector)
+            monitorSpecificElement(querySelector.parentNode.parentNode.parentNode.parentNode);
             clearInterval(intervalId); // Stop searching once the button is found and clicked
         } else {
             console.log('Claim Bonus button not found. Retrying in 5 seconds...');
