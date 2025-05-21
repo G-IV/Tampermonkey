@@ -17,7 +17,7 @@
 function monitorSpecificElement(querySelector) {
     //'.Layout-sc-1xcs6mc-0.kxrhnx'
     const targetElement = document.querySelector(querySelector);
-
+    console.log('Target element:', targetElement);
     if (!targetElement) {
         console.warn('Target element not found. Retrying...');
         setTimeout(monitorSpecificElement, 1000); // Retry after 1 second if the element is not found
